@@ -1,7 +1,7 @@
 'use client'
-import { addImage, addTask, deleteTask } from '@/app/server/actions'
+import { toAddImage, toAddTask, toDeleteTask } from '../app/server/actions.ts'
 import React, { useState } from 'react'
-import ViewTasks from '@/componentes/view-tasks.jsx'
+import ViewTasks from '../componentes/view-tasks.jsx'
 
 const formatDate = () => {
 	const date = new Date(Date.now())
@@ -36,7 +36,7 @@ const TaskPage = () => {
 		const formData = new FormData()
 		formData.append('img', file)
 		formData.append('category', tasks.source)
-		const imgUrl = await addImage(formData)
+		const imgUrl = await toAddImage(formData)
 		setImg(imgUrl.message)
 		console.log({ imgUrl })
 	}
@@ -53,7 +53,7 @@ const TaskPage = () => {
 		if (newTask.includes(':')) {
 			const partTask = newTask.split(':')
 
-            if (partTask[ 1 ] === 'del') return await deleteTask(partTask[ 0 ])
+            if (partTask[ 1 ] === 'del') return await toDeleteTask(partTask[ 0 ])
             
 			task = {
 				concept: partTask[1],
@@ -76,15 +76,15 @@ const TaskPage = () => {
 		setTasks([...tasks, task])
 		setNewTask('')
 
-		const _addTask = await addTask(task)
-		console.log(_addTask)
+		const $AddTask = await toAddTask(task)
+		console.log($AddTask)
 	}
 
 	return (
 		<section className='w-full min-h-screen flex justify-center overflow-hidden pt-4 bg-indigo-300'>
-			<article className='w-[380px] h-fit bg-indigo-100'>
+			<article className='w-[380px] h-fit bg-indigo-900'>
 				<h1 className='text-center py-6 text-2xl  underline'>
-					Tasks Manager [T-8]
+					Tasks Manager
 				</h1>
 				<section className='flex flex-col py-4'>
 					<div className='flex justify-between '>
@@ -97,7 +97,7 @@ const TaskPage = () => {
 						/>
 						<button
 							onClick={handleAddTask}
-							className='w-10 h-10 bg-indigo-600 hover:bg-indigo-700 text-4xl text-white font-bold '
+							className='w-10 h-10 bg-indigo-600 hover:bg-indigo-700 text-4xl text-white font-bold cursor-pointer'
 						>
 							+
 						</button>

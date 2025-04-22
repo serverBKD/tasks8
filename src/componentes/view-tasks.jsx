@@ -1,5 +1,5 @@
 'use client'
-import { getTasks ,updateTask} from '@/app/server/actions.js'
+import { toGetTasks ,toUpdateTask} from '../app/server/actions.ts'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 
@@ -10,30 +10,16 @@ export default function ViewTasks() {
     const [Kyrye,setKyrye] = useState('Kyrye')
 
     useEffect(() => {
-        const _getTasks = async () => {
-            const _tasksInitial = await getTasks()
-            setTasks(_tasksInitial)
-            console.log({_tasksInitial})
+        const $getTasks = async () => {
+            const $tasksInitial = await toGetTasks()
+            setTasks($tasksInitial)
+            console.log({$tasksInitial})
         }
-        _getTasks()
+        $getTasks()
     }, [])
 
-    //  // guardar tasks de LocalStorage
-    // useEffect(() => {
-    //     localStorage.setItem('tasksInitial', JSON.stringify(tasksInitial))
-    // }, [ tasks ])
-
-    // // guardar tasks en LocalStorage
-    // useEffect(() => {
-    //     const tasks = JSON.parse(localStorage.getItem('tasksInitial')) || []
-    //     setTasks(tasks)
-    // }, [tasksInitial])
-
-
-    
     const handleToggleTask = async (task) => {
-        const TaskUpdtated = await updateTask(task)
-        console.log('TaskUpdtated', TaskUpdtated)
+        await toUpdateTask(task)
     }
 
     return (
@@ -54,7 +40,7 @@ export default function ViewTasks() {
                         <div className={`${task.debit ? 'bg-indigo-950 text-slate-100' : 'bg-indigo-500'} w-full flex items-center justify-between px-2 py-4`}>
                             <p className=''>{task.amount}</p>
                             <p style={{ textDecoration: task.completed ? 'line-through' : 'none' }} className='px-6 text-balance italic truncate max-h-32 line-clamp-3'>{task.concept}</p>
-                            <button onClick={() => handleToggleTask(task)}>
+                            <button onClick={() => handleToggleTask(task)} className='cursor-pointer'>
                                 {!task.completed ? '❌' : '✔️'}
                             </button>
                         </div>
