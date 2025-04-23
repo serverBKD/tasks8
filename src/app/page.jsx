@@ -2,8 +2,9 @@
 import { toAddImage, toAddTask, toDeleteTask } from '../app/server/actions.ts'
 import React, { useState } from 'react'
 import ViewTasks from '../componentes/view-tasks.jsx'
+import CardTasks from '../componentes/card-tasks.jsx'
 
-const formatDate = () => {
+const toFormatDate = () => {
 	const date = new Date(Date.now())
 	const months = [
 		'JAN',
@@ -24,12 +25,19 @@ const formatDate = () => {
 	const year = date.getFullYear().toString().slice(-2)
 	return `${day}${month}${year}`
 }
-const formattedDate = formatDate()
+const $FormattedDate = toFormatDate()
 
 const TaskPage = () => {
 	const [tasks, setTasks] = useState([])
 	const [newTask, setNewTask] = useState('')
-	const [image, setImg] = useState('')
+	const [ image, setImg ] = useState('')
+	const [ isCard, setIsCard ] = useState(false)
+
+	const handleIsCard = (evt) => {
+		evt.preventDefault()
+		setIsCard(!isCard)
+		console.log({isCard})
+	}
 
 	const handleAddImg = async (e) => {
 		const file = e.target.files[0]
@@ -81,8 +89,8 @@ const TaskPage = () => {
 	}
 
 	return (
-		<section className='w-full min-h-screen flex justify-center overflow-hidden pt-4 bg-indigo-300'>
-			<article className='w-[380px] h-fit bg-indigo-900'>
+		<section className='w-full min-h-screen flex flex-col justify-center  overflow-hidden pt-4 bg-indigo-300'>
+			<article className='w-[380px] h-fit mx-auto bg-indigo-900'>
 				<h1 className='text-center py-6 text-2xl  underline'>
 					Tasks Manager
 				</h1>
@@ -112,8 +120,16 @@ const TaskPage = () => {
 						/>
 					</div>
 				</section>
-				<ViewTasks formattedDate />
+				<div className='w-full flex items-center justify-center bg-purple-600'>
+					<input
+						type="button"
+						value={isCard ? 'List': 'Cards'}
+						onClick={(evt) => handleIsCard(evt)}
+						className="w-full cursor-pointer uppercase text-center text-slate-800 font-bold bg-indigo-300 hover:bg-indigo-400 py-2"
+						/>
+				</div>
 			</article>
+			{isCard ?  <CardTasks />: <ViewTasks/>}
 		</section>
 	)
 }

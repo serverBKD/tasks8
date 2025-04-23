@@ -2,7 +2,6 @@
 import prisma from "../../db/db.prisma.js";
 import { Buffer } from "node:buffer";
 import { writeFile } from "fs/promises";
-import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 import path from "node:path";
 import { existsSync, mkdirSync } from "node:fs";
@@ -77,6 +76,7 @@ export async function toUpdateTask(updateTask: Task) {
       completed: !completed,
     },
   });
+  //. Actualizar la pagina para que se vea el cambio
   revalidatePath("/");
   return;
 }

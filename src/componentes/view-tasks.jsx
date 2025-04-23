@@ -23,7 +23,7 @@ export default function ViewTasks() {
     }
 
     return (
-        <section className='w-full flex flex-col items-center bg-indigo-800'>
+        <section className='w-full sm:w-[380px] h-fit mx-auto flex flex-col items-center bg-indigo-800'>
             <div>
                 <h1 className='text-indigo-50 text-4xl uppercase underline py-8'>{Kyrye}</h1>
             </div>
