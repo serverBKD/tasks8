@@ -125,9 +125,9 @@ const TaskPage = () => {
 	}	
 
 	return (
-		<section className='w-full min-h-screen pt-2 lg:pt-4 flex flex-col justify-start overflow-hidden bg-indigo-700'>
+		<section className={`${OrbitronBlackFont.className} w-full min-h-screen pt-2 lg:pt-4 flex flex-col justify-start overflow-hidden bg-indigo-700`}>
 			<article className='w-[380px] h-fit mx-auto bg-indigo-900'>
-				<h1 className='text-center py-2 text-2xl  underline'>
+				<h1 className='text-center py-2 text-4xl'>
 					Tasks Manager
 				</h1>
 				<div>
