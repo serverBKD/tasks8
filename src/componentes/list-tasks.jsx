@@ -1,32 +1,21 @@
 'use client'
-import { toGetTasks ,toUpdateTask} from '../app/server/actions.ts'
+import { toUpdateTask} from '../app/server/actions.ts'
 import Image from 'next/image'
-import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
-export default function ViewTasks() {
-    // const [ tasksInitial, setTasksInitial ] = useState([])
-    const [ tasks, setTasks ] = useState([])
-
-    const [Kyrye,setKyrye] = useState('Kyrye')
-
-    useEffect(() => {
-        const $getTasks = async () => {
-            const $tasksInitial = await toGetTasks()
-            setTasks($tasksInitial)
-            console.log({$tasksInitial})
-        }
-        $getTasks()
-    }, [])
-
+export default function ListTasks({ tasks,$id }) {
+    const { refresh } = useRouter()
+    console.log('tasks', tasks);
+    
     const handleToggleTask = async (task) => {
         await toUpdateTask(task)
+        refresh()
+        return
     }
-
+    
     return (
         <section className='w-full sm:w-[380px] h-fit mx-auto flex flex-col items-center bg-indigo-800'>
-            <div>
-                <h1 className='text-indigo-50 text-4xl uppercase underline py-8'>{Kyrye}</h1>
-            </div>
+
             <ul className='w-full px-2 py-1 gap-y-3 mb-2'>
                 {tasks.map((task) => (
                     <li key={task.id} className="flex flex-col justify-between py-1 text-2xl">

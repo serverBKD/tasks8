@@ -43,13 +43,12 @@ export async function toGetTasks() {
       },
     ],
   });
-  revalidatePath("/");
   return $Task;
 }
 
 export async function toAddTask($AddTask: Task) {
   const { concept, amount, debit, img, notes, initAt } = $AddTask;
-  const newTask = await prisma.Tasks.create({
+  const $newTask = await prisma.Tasks.create({
     data: {
       concept,
       amount,
@@ -61,13 +60,20 @@ export async function toAddTask($AddTask: Task) {
     },
   });
 
-  if (!newTask) return;
-  revalidatePath("/");
-  return;
+  if (!$newTask) return;
+  return $newTask;
 }
 
 export async function toUpdateTask(updateTask: Task) {
   const { id, completed } = updateTask;
+  if (!id) return;
+  const $idTask = await prisma.Tasks.findFirst({
+    where: {
+      id: id,
+    },
+  });
+  if (!$idTask) return;
+
   await prisma.Tasks.update({
     where: {
       id: id,
@@ -76,7 +82,7 @@ export async function toUpdateTask(updateTask: Task) {
       completed: !completed,
     },
   });
-  //. Actualizar la pagina para que se vea el cambio
+  //. Revalidar la ruta para que se vea el cambio en la UI
   revalidatePath("/");
   return;
 }
@@ -93,7 +99,6 @@ export async function toDeleteTask(deleteTask: Task) {
       id: $idTask.id,
     },
   });
-  revalidatePath("/");
   return $TASK;
 }
 

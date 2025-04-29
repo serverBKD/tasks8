@@ -1,8 +1,12 @@
 'use client'
-import { toAddImage, toAddTask, toDeleteTask } from '../app/server/actions.ts'
-import React, { useState } from 'react'
-import ViewTasks from '../componentes/view-tasks.jsx'
+import { toAddImage, toAddTask, toDeleteTask } from './server/actions.ts'
+import React, { useState,useEffect,useId } from 'react'
+import ListTasks from '../componentes/list-tasks.jsx'
 import CardTasks from '../componentes/card-tasks.jsx'
+import { useRouter } from 'next/navigation'
+import { toGetTasks } from './server/actions.ts'
+
+import {OrbitronBlackFont} from '../services/fonts.js'
 
 const toFormatDate = () => {
 	const date = new Date(Date.now())
@@ -28,17 +32,34 @@ const toFormatDate = () => {
 const $FormattedDate = toFormatDate()
 
 const TaskPage = () => {
+	const $id = useId()
+	const { refresh } = useRouter()
 	const [tasks, setTasks] = useState([])
 	const [newTask, setNewTask] = useState('')
 	const [ image, setImg ] = useState('')
 	const [ isCard, setIsCard ] = useState(false)
+	const [Kyrye,setKyrye] = useState('Kyrye')
+	const [ tasksInitial, setTasksInitial ] = useState([])
 
+
+	useEffect(() => {
+		const $getTasks = async () => {
+			const $tasksInitial = await toGetTasks()
+			setTasks($tasksInitial)
+			setKyrye(localStorage.getItem('kyrye'))
+		}
+		$getTasks()
+	}, [])
+	
+	
+	//! Select between Card and List
 	const handleIsCard = (evt) => {
 		evt.preventDefault()
 		setIsCard(!isCard)
 		console.log({isCard})
 	}
 
+	//! Save the image on the cloud
 	const handleAddImg = async (e) => {
 		const file = e.target.files[0]
 		const formData = new FormData()
@@ -61,22 +82,29 @@ const TaskPage = () => {
 		if (newTask.includes(':')) {
 			const partTask = newTask.split(':')
 
-            if (partTask[ 1 ] === 'del') return await toDeleteTask(partTask[ 0 ])
+			if (partTask[ 1 ] === 'del') return await toDeleteTask(partTask[ 0 ])
+			
+			if (partTask[ 1 ] === 'kyrye') {
+				setKyrye(partTask[ 0 ])
+				// guardar el nombre en el localStorage o en una base de datos
+				localStorage.setItem('kyrye', partTask[ 0 ])
+				return
+			}
+
             
 			task = {
 				concept: partTask[1],
                 debit: parseFloat(partTask[ 0 ]) < 0 ?? false,
                 notes:partTask[ 1 ].includes('kyrye') ? partTask[ 0 ]: '',
 				img: image,
-				initAt: formattedDate,
-				amount: parseFloat(partTask[0]) || 0,
-			}
+				initAt: $FormattedDate,
+				amount: parseFloat(partTask[0]) || 0			}
 		} else {
 			task = {
 				concept: newTask,
 				debit: false,
 				img: image,
-				initAt: formattedDate,
+				initAt: $FormattedDate,
 				amount: parseFloat(newTask) || 0,
 			}
 		}
@@ -84,16 +112,27 @@ const TaskPage = () => {
 		setTasks([...tasks, task])
 		setNewTask('')
 
+	try {
 		const $AddTask = await toAddTask(task)
-		console.log($AddTask)
-	}
+		setImg('')
+		refresh()
+		console.log({$AddTask})
+		return
+		}
+		catch (error) {
+			console.error(error)
+		}
+	}	
 
 	return (
-		<section className='w-full min-h-screen flex flex-col justify-center  overflow-hidden pt-4 bg-indigo-300'>
+		<section className='w-full min-h-screen pt-2 lg:pt-4 flex flex-col justify-start overflow-hidden bg-indigo-700'>
 			<article className='w-[380px] h-fit mx-auto bg-indigo-900'>
-				<h1 className='text-center py-6 text-2xl  underline'>
+				<h1 className='text-center py-2 text-2xl  underline'>
 					Tasks Manager
 				</h1>
+				<div>
+                <h2 className={`${OrbitronBlackFont.className} text-indigo-50 text-4xl uppercase underline py-8 text-center`}>{Kyrye}</h2>
+            </div>
 				<section className='flex flex-col py-4'>
 					<div className='flex justify-between '>
 						<input
@@ -129,9 +168,11 @@ const TaskPage = () => {
 						/>
 				</div>
 			</article>
-			{isCard ?  <CardTasks />: <ViewTasks/>}
+			{isCard ?  <CardTasks tasks={tasks}/>: <ListTasks tasks={tasks}/>}
 		</section>
 	)
 }
 
 export default TaskPage
+
+// %##""4
