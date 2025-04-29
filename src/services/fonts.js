@@ -1,4 +1,4 @@
-import { localFonts } from "next/font/local";
+import localFonts from "next/font/local";
 
 export const OrbitronBlackFont = localFonts({
   src: "./Orbitron-Black.ttf",
