@@ -105,7 +105,7 @@ export async function toDeleteTask(deleteTask: Task) {
 //! Image -> Firebase Storage
 
 export async function toAddImage(payload: FormData) {
-  const CATEGORY = payload.get("category") || "trifaxic-13";
+  const CATEGORY = payload.get("category") || "server241";
   const IMAGE = payload.get("img");
   if (typeof IMAGE !== "string" && IMAGE?.name) {
     NAME = IMAGE.name.toLowerCase();
@@ -123,8 +123,8 @@ export async function toAddImage(payload: FormData) {
   }
 
   //. Guardar archivo en Carpeta Public
-  const newFolder = typeof CATEGORY === "string" ? CATEGORY : "default-folder";
-  const imagePath = `${CATEGORY}-${new Date().getTime()}-tr1f4x1c-${NAME}`;
+  const newFolder = typeof CATEGORY === "string" ? CATEGORY : "repoImg";
+  const imagePath = `${CATEGORY}-${new Date().getTime()}-server241-${NAME}`;
   const newPath = path.join(process.cwd(), "public", "repo", newFolder);
 
   //! save at local in DEV
