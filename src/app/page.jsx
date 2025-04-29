@@ -125,14 +125,15 @@ const TaskPage = () => {
 	}	
 
 	return (
-		<section className={`${OrbitronBlackFont.className} w-full min-h-screen pt-2 lg:pt-4 flex flex-col justify-start overflow-hidden bg-indigo-700`}>
+		<section className={`${OrbitronBlackFont.className} w-full min-h-screen lg:pt-4 flex flex-col justify-start overflow-hidden bg-indigo-700`}>
 			<article className='w-[380px] h-fit mx-auto bg-indigo-900'>
-				<h1 className='text-center py-2 text-4xl'>
+				<h1 className='text-center pt-8 text-4xl'>
 					Tasks Manager
 				</h1>
+				{/* <!-- Word of Week --> */}
 				<div>
-                <h2 className={`${OrbitronBlackFont.className} text-indigo-50 text-4xl uppercase underline py-8 text-center`}>{Kyrye}</h2>
-            </div>
+                	<h2 className={`${OrbitronBlackFont.className} text-indigo-50 text-4xl uppercase underline py-8 text-center`}>{Kyrye}</h2>
+            	</div>
 				<section className='flex flex-col py-4'>
 					<div className='flex justify-between '>
 						<input
@@ -149,26 +150,28 @@ const TaskPage = () => {
 							+
 						</button>
 					</div>
-					<div>
 						<input
 							type='file'
 							name='img'
 							id='img'
-							className='<input type="file" class="block w-full text-xs bg-indigo-300 text-slate-600 file:mr-2 file:py-2 file:px-4 file:border-0 file:text-xs file:font-semibold file:bg-indigo-300 file:text-slate-600 hover:file:bg-indigo-400 border-t-2 border-indigo-700 " />'
-							onChange={(e) => handleAddImg(e)}
+							className='<input type="file" class="block w-full text-xs bg-cyan-500 text-slate-600 file:mr-2 file:p-2 file:border-0 file:text-xs file:font-semibold file:bg-cyan-400 file:text-slate-50 hover:file:bg-orange-400 border-t-2 border-indigo-700 " />'
+							onChange={(evt) => handleAddImg(evt)}
+							accept='image/*'
 						/>
-					</div>
 				</section>
 				<div className='w-full flex items-center justify-center bg-purple-600'>
 					<input
 						type="button"
 						value={isCard ? 'List': 'Cards'}
 						onClick={(evt) => handleIsCard(evt)}
-						className="w-full cursor-pointer uppercase text-center text-slate-800 font-bold bg-indigo-300 hover:bg-indigo-400 py-2"
+						className="w-full cursor-pointer uppercase text-center text-2xl text-slate-50 font-bold bg-cyan-500 hover:bg-cyan-600 py-2"
 						/>
 				</div>
 			</article>
-			{isCard ?  <CardTasks tasks={tasks}/>: <ListTasks tasks={tasks}/>}
+			{!isCard ?
+				<CardTasks tasks={tasks} /> :
+				<ListTasks tasks={tasks} />
+			}
 		</section>
 	)
 }
