@@ -12,8 +12,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: " [T-8]",
-  description: "Task Manager app",
+  title: "Task Manager",
+  description: "Task Manager [T-8] app",
 };
 
 export default function RootLayout({ children }) {

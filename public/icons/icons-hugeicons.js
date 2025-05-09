@@ -17,7 +17,7 @@ export const IconsCode1 = ({ props }) => (
 
 export const IconsBarcode = ({ props }) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width={24} height={24} color={"#fff"} fill={"none"} {...props}
-    className="w-full h-full drop-shadow-lg drop-shadow-cyan-900 bg-cyan-500"
+    className="w-full h-full"
   >
     <path d="M3 4V20" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
     <path d="M7.5 4V17" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
@@ -32,7 +32,7 @@ export const IconsBarcode = ({ props }) => (
 
 export const IconsDollar = ({ props }) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" color="#fff" fill="none"
-    className="w-full h-full drop-shadow-lg drop-shadow-cyan-900 bg-red-500"
+    className="w-full h-full"
   >
     <path d="M14.4998 10.4999C14.4998 11.8806 13.3805 12.9999 11.9998 12.9999C10.6191 12.9999 9.4998 11.8806 9.4998 10.4999C9.4998 9.11921 10.6191 7.99992 11.9998 7.99992C13.3805 7.99992 14.4998 9.11921 14.4998 10.4999Z" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>
     <path d="M16 3.5C18.4794 3.5 20.1903 3.88421 21.1329 4.17632C21.6756 4.34452 22 4.85889 22 5.42705V15.1823C22 16.2974 20.7719 17.1364 19.6762 16.9295C18.7361 16.752 17.5107 16.6094 16 16.6094C11.2491 16.6094 10.1096 18.4151 3.1448 16.8792C2.47265 16.731 2 16.1265 2 15.4382V5.42116C2 4.44531 2.92079 3.73366 3.87798 3.92361C10.1967 5.17747 11.4209 3.5 16 3.5Z" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path>

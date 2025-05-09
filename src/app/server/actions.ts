@@ -9,7 +9,7 @@ import { SubirFiles } from "../../services/firebase.config.js";
 
 //TODO: Seguridad en las Cookies
 
-let NAME: string | undefined;
+let $NAME: string | undefined;
 
 let URL: string | undefined;
 let FILE: string | undefined;
@@ -105,27 +105,27 @@ export async function toDeleteTask(deleteTask: Task) {
 //! Image -> Firebase Storage
 
 export async function toAddImage(payload: FormData) {
-  const CATEGORY = payload.get("category") || "server241";
-  const IMAGE = payload.get("img");
-  if (typeof IMAGE !== "string" && IMAGE?.name) {
-    NAME = IMAGE.name.toLowerCase();
+  const $CATEGORY = payload.get("category") || "server241"
+  const $IMAGE = payload.get("img");
+  if (typeof $IMAGE !== "string" && $IMAGE?.name) {
+    $NAME = $IMAGE.name.toLowerCase();
   }
-  if (IMAGE === "undefined") {
+  if ($IMAGE === "undefined") {
     return { message: "no image" };
   }
 
   //. Convertir FormData en Buffer: Archivo cargado en Memoria RAM
-  if (typeof IMAGE !== "string" && IMAGE?.arrayBuffer) {
-    const bytes = await IMAGE.arrayBuffer();
+  if (typeof $IMAGE !== "string" && $IMAGE?.arrayBuffer) {
+    const bytes = await $IMAGE.arrayBuffer();
     buffer = Buffer.from(bytes);
   } else {
     return { message: "Invalid image format" };
   }
 
   //. Guardar archivo en Carpeta Public
-  const newFolder = typeof CATEGORY === "string" ? CATEGORY : "repoImg";
-  const imagePath = `${CATEGORY}-${new Date().getTime()}-server241-${NAME}`;
-  const newPath = path.join(process.cwd(), "public", "repo", newFolder);
+  const newFolder = typeof $CATEGORY === "string" ? $CATEGORY : "repoImg";
+  const imagePath = `${$CATEGORY}-${new Date().getTime()}-formTask-${$NAME}`;
+  const newPath = path.join(process.cwd(), "public",'repo', "formTask", newFolder);
 
   //! save at local in DEV
   if (process.env.NODE_ENV === "development") {
@@ -138,7 +138,7 @@ export async function toAddImage(payload: FormData) {
 
   try {
     //. Subir al Bucket Firebase
-    const imageURL = await SubirFiles(buffer, NAME);
+    const imageURL = await SubirFiles(buffer, $NAME);
     console.log(imageURL);
     if (!imageURL) {
       const localFilePath = path.join(newPath, imagePath); // Ensure localFilePath is defined
@@ -146,7 +146,7 @@ export async function toAddImage(payload: FormData) {
     }
     return { message: imageURL };
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
 

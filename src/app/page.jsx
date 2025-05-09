@@ -1,12 +1,10 @@
 'use client'
-import { toAddImage, toAddTask, toDeleteTask } from './server/actions.ts'
 import React, { useState,useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import {OrbitronBlackFont} from '../services/fonts.js'
+import { toAddImage,toGetTasks, toAddTask, toDeleteTask } from './server/actions.ts'
 import ListTasks from '../componentes/list-tasks.jsx'
 import CardTasks from '../componentes/card-tasks.jsx'
-import { useRouter } from 'next/navigation'
-import { toGetTasks } from './server/actions.ts'
-
-import {OrbitronBlackFont} from '../services/fonts.js'
 
 const toFormatDate = () => {
 	const date = new Date(Date.now())
@@ -48,7 +46,6 @@ const TaskPage = () => {
 		$getTasks()
 	}, [])
 	
-	
 	//! Select between Card and List
 	const handleIsCard = (evt) => {
 		evt.preventDefault()
@@ -58,8 +55,8 @@ const TaskPage = () => {
 	}
 
 	//! Save the image on the cloud
-	const handleAddImg = async (e) => {
-		const file = e.target.files[0]
+	const handleAddImg = async (evt) => {
+		const file = evt.target.files[0]
 		const formData = new FormData()
 		formData.append('img', file)
 		formData.append('category', 'tasks-app')
@@ -89,7 +86,6 @@ const TaskPage = () => {
 				localStorage.setItem('kyrye', partTask[ 0 ])
 				return
 			}
-
             
 			task = {
 				concept: partTask[1],
@@ -115,7 +111,6 @@ const TaskPage = () => {
 		const $AddTask = await toAddTask(task)
 		setImg('')
 		refresh()
-		console.log({$AddTask})
 		return
 		}
 		catch (error) {
@@ -126,12 +121,12 @@ const TaskPage = () => {
 	return (
 		<section className={`${OrbitronBlackFont.className} w-full min-h-screen lg:pt-4 flex flex-col justify-start overflow-hidden bg-indigo-800`}>
 			<article className='w-[380px] h-fit mx-auto bg-indigo-800'>
-				<h1 className='text-center pt-8 text-4xl'>
+				<h1 className='text-center pt-8 pb-2 text-4xl text-orange-500 tracking-wider shadow-lg'>
 					Tasks Manager
 				</h1>
 				{/* <!-- Word of Week --> */}
 				<section>
-                	<h2 className={`${OrbitronBlackFont.className} text-indigo-50 text-4xl uppercase underline py-8 text-center`}>{Kyrye}</h2>
+                	<h2 className={`${OrbitronBlackFont.className} text-orange-500 text-4xl uppercase underline py-8 text-center`}>{Kyrye}</h2>
             	</section>
 				<section className='flex flex-col pt-4 pb-1'>
 					<div className='flex justify-between'>
@@ -168,7 +163,7 @@ const TaskPage = () => {
 						/>
 				</section>
 			</article>
-			<section className=" bg-indigo-800">
+			<section className="bg-indigo-800">
 			{!isCard ?
 				<CardTasks tasks={tasks} /> :
 				<ListTasks tasks={tasks} />
@@ -180,4 +175,3 @@ const TaskPage = () => {
 
 export default TaskPage
 
-// %##""4
