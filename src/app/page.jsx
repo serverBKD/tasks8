@@ -128,7 +128,7 @@ const TaskPage = () => {
     <section
       className={`${OrbitronBlackFont.className} w-full min-h-screen lg:pt-4 flex flex-col justify-start overflow-hidden tracking-wider text-1-text bg-1-bg`}
     >
-      <article className="w-[420px] h-fit mx-auto">
+      <article className="card h-fit mx-auto">
         <h1 className="text-center pt-8 pb-2 text-4xl">
           Tasks Manager
         </h1>
@@ -153,7 +153,7 @@ const TaskPage = () => {
             type="file"
             name="img"
             id="img"
-            className='<input type="file" class="block w-full text-xs bg-1-link hover:file:bg-1-accent file:mr-2 file:px-4 file:py-1 file:border-0" />'
+            className='<input type="file" class="block w-full text-xs bg-1-link hover:file:bg-1-accent file:mr-2 file:px-4 file:py-1 file:border-0 file:placeholder:text-1-link" />'
             onChange={(evt) => handleUpImage(evt)}
             accept="image/png, image/jpeg, image/jpg"
           />
@@ -176,7 +176,7 @@ const TaskPage = () => {
           {Kyrye}
         </h2>
       </section>
-      <section className="bg-1-bg">
+      <section className="w-full max-w-7xl mx-auto bg-1-bg">
         {!isCard ? <CardTasks tasks={tasks} /> : <ListTasks tasks={tasks} />}
       </section>
     </section>

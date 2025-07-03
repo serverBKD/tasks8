@@ -65,12 +65,12 @@ export async function toAddTask($AddTask: Task) {
 export async function toUpdateTask(updateTask: Task) {
   const { id, completed } = updateTask;
   if (!id) return;
-  const $idTask = await prisma.Tasks.findFirst({
+  const existingTask = await prisma.Tasks.findFirst({
     where: {
       id: id,
     },
   });
-  if (!$idTask) return;
+  if (!existingTask) return;
 
   await prisma.Tasks.update({
     where: {
@@ -82,19 +82,18 @@ export async function toUpdateTask(updateTask: Task) {
   });
   //. Revalidar la ruta para que se vea el cambio en la UI
   revalidatePath("/");
-  return;
 }
 
 export async function toDeleteTask(deleteTask: Task) {
-  const $idTask = await prisma.Tasks.findFirst({
+  const existingTask = await prisma.Tasks.findFirst({
     where: {
       concept: `${deleteTask}`,
     },
   });
-  if (!$idTask) return;
+  if (!existingTask) return;
   const $TASK = await prisma.Tasks.delete({
     where: {
-      id: $idTask.id,
+      id: existingTask.id,
     },
   });
   return $TASK;
