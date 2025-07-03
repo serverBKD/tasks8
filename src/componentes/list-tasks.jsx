@@ -47,6 +47,8 @@ export default function ListTasks({ tasks }) {
                 {task.concept}
               </p>
               <button
+                type="button"
+                aria-label="Toggle task completion"
                 onClick={() => handleToggleTask(task)}
                 className="cursor-pointer"
               >
