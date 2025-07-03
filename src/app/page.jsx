@@ -35,7 +35,7 @@ const toFormatDate = () => {
 const $FormattedDate = toFormatDate();
 
 const TaskPage = () => {
-  const { refresh } = useRouter();
+  const router = useRouter();
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
   const [image, setImg] = useState("");
@@ -114,10 +114,10 @@ const TaskPage = () => {
     setNewTask("");
 
     try {
-      const $AddTask = await toAddTask(task);
-      console.log({ $AddTask });
+      const AddTask = await toAddTask(task);
+      console.log({ AddTask });
       setImg("");
-      refresh();
+      router.refresh();
       return;
     } catch (error) {
       console.error(error);
@@ -144,7 +144,7 @@ const TaskPage = () => {
             <button
               type="button"
               onClick={handleAddTask}
-              className="w-48 h-24 hover:bg-1-link bg-1-accent text-dark-text text-6xl font-bold cursor-pointer sm:rounded-tr-lg"
+              className="w-48 h-24 bg-1-link hover:bg-1-accent text-dark-text text-6xl font-bold cursor-pointer sm:rounded-tr-lg"
             >
               +
             </button>

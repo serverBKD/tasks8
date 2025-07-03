@@ -14,15 +14,15 @@ export default function ListTasks({ tasks }) {
 
 	return (
 		<section className="card h-fit mx-auto flex flex-col items-center bg-1-bg">
-			<article className="w-full px-2 py-1 gap-y-1 mb-2">
+			<ul className="w-full px-2 py-1 gap-y-1 mb-2">
 				{tasks.map((task) => (
-					<li
-						key={task.id}
+					<di
+						key={task?.id}
 						className="flex flex-col justify-between py-1 text-2xl"
 					>
 						<div
 							className={`${
-								task.debit ? "bg-indigo-950 text-slate-100" : "bg-indigo-500"
+								task?.debit ? "bg-1-error text-1-text" : "bg-1-link"
 							} w-full flex items-center justify-between px-2 py-4`}
 						>
 							<p className="">{task.amount}</p>
@@ -38,7 +38,7 @@ export default function ListTasks({ tasks }) {
 								type="button"
 								aria-label="Toggle task completion"
 								onClick={() => handleToggleTask(task)}
-								className="cursor-pointer"
+								className="cursor-pointer bg-inherit text-1-bg"
 							>
 								{!task.completed ? "✔️" : "❌"}
 							</button>
@@ -54,9 +54,9 @@ export default function ListTasks({ tasks }) {
 								/>
 							)}
 						</div>
-					</li>
+					</di>
 				))}
-			</article>
+			</ul>
 		</section>
 	);
 }
