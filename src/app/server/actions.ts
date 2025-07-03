@@ -1,28 +1,26 @@
 "use server";
-import prisma from "../../db/db.prisma.js";
 import { Buffer } from "node:buffer";
-import { writeFile } from "fs/promises";
-import { revalidatePath } from "next/cache";
+import prisma from "../../db/db.prisma.js";
 import path from "node:path";
+import { revalidatePath } from "next/cache";
 import { existsSync, mkdirSync } from "node:fs";
-import { SubirFiles } from "../../services/firebase.config.js";
+import  { upImages }from "../../services/firebase.config.js";
+import { writeFile } from "fs/promises";
 
 //TODO: Seguridad en las Cookies
 
 let $NAME: string | undefined;
 
-let URL: string | undefined;
-let FILE: string | undefined;
 let buffer: Buffer | undefined;
 
 type FormData = {
-  get: {(key: string) : string | File | undefined}
+  get: (key: string) => string | File | undefined
 }
 
 interface Task {
   id?: string
   concept?: string 
-  amount?: Number 
+  amount?: number 
   debit?: string 
   img?: string | URL 
   notes?: string 
@@ -124,8 +122,8 @@ export async function toAddImage(payload: FormData) {
 
   //. Guardar archivo en Carpeta Public
   const newFolder = typeof $CATEGORY === "string" ? $CATEGORY : "repoImg";
-  const imagePath = `${$CATEGORY}-${new Date().getTime()}-formTask-${$NAME}`;
-  const newPath = path.join(process.cwd(), "public",'repo', "formTask", newFolder);
+  const imagePath = `${$CATEGORY}-${Date.now()}-formTask-${$NAME}`;
+  const newPath = path.join(process.cwd(), "public","formTask", newFolder);
 
   //! save at local in DEV
   if (process.env.NODE_ENV === "development") {
@@ -133,20 +131,22 @@ export async function toAddImage(payload: FormData) {
       mkdirSync(newPath, { recursive: true });
     }
     const localFilePath = path.join(newPath, imagePath);
-    await writeFile(localFilePath, buffer);
+    if (buffer) {
+      await writeFile(localFilePath, buffer);
+    }
   }
 
   try {
     //. Subir al Bucket Firebase
-    const imageURL = await SubirFiles(buffer, $NAME);
-    console.log(imageURL);
-    if (!imageURL) {
-      const localFilePath = path.join(newPath, imagePath); // Ensure localFilePath is defined
-      return { message: localFilePath };
+    if (!buffer) {
+      return { message: "Buffer is undefined" };
     }
+    const imageURL = await upImages(buffer, imagePath);
+    console.log(imageURL);
     return { message: imageURL };
   } catch (error) {
     console.error(error);
+    return { message: "Error uploading image" };
   }
 }
 

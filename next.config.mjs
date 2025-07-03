@@ -1,4 +1,3 @@
-import million from "million/compiler";
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -15,19 +14,6 @@ const nextConfig = {
       },
     ],
   },
-  experimental: {
-    turbo: {
-      resolveExtensions: [
-        ".mdx",
-        ".tsx",
-        ".ts",
-        ".jsx",
-        ".js",
-        ".mjs",
-        ".json",
-      ],
-    },
-  },
 };
 
-export default million.next(nextConfig, { auto: { rsc: true } });
+export default nextConfig

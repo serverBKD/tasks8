@@ -1,7 +1,7 @@
 'use client'
 import React, { useState,useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import {OrbitronBlackFont} from '../services/fonts.js'
+import {OrbitronBlackFont} from '../services/fonts/fonts.js'
 import { toAddImage,toGetTasks, toAddTask, toDeleteTask } from './server/actions.ts'
 import ListTasks from '../componentes/list-tasks.jsx'
 import CardTasks from '../componentes/card-tasks.jsx'
@@ -109,6 +109,7 @@ const TaskPage = () => {
 
 	try {
 		const $AddTask = await toAddTask(task)
+		console.log({ $AddTask })
 		setImg('')
 		refresh()
 		return
@@ -138,6 +139,7 @@ const TaskPage = () => {
 							className='w-full h-10 bg-indigo-400 hover:bg-orange-500 text-black font-bold py-2 pl-1 placeholder-slate-50 focus-visible:border-0 focus-visible:outline-none focus-visible:ring-0 sm:rounded-tl-lg'
 						/>
 						<button
+							type="button"
 							onClick={handleAddTask}
 							className='w-20 h-10 bg-indigo-600 hover:bg-orange-700 text-4xl text-white font-bold cursor-pointer sm:rounded-tr-lg'
 						>

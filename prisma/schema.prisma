@@ -8,31 +8,6 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
-model Newsletters {
-  id        Int      @id @default(autoincrement())
-  fullname  String?
-  email     String?
-  tel       String?
-  message   String?
-  source    String?  @default("form-trifaxic")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Persona {
-  id        String   @id @unique
-  fullname  String
-  email     String?  @unique
-  tel       String?
-  city      String?  @default("valencia")
-  img       String?
-  notes     String?
-  source    String?  @default("form-clients")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  Ventas    Ventas[]
-}
-
 model Auth {
   id        Int      @id @unique @default(autoincrement())
   nickname  String?
@@ -40,7 +15,7 @@ model Auth {
   hashPass  String
   role      Boolean? @default(false)
   img       String?
-  source    String?  @default("form-login-trifaxic")
+  source    String?  @default("form-login")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -66,7 +41,7 @@ model Product {
   tags        String?
   category    String?
   warehouseId Int       @default(0)
-  source      String?   @default("trifaxic")
+  source      String?   @default("form-product")
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   Warehouse   Warehouse @relation(fields: [warehouseId], references: [id])
@@ -75,14 +50,13 @@ model Product {
 
 model Warehouse {
   id        Int       @id @unique @default(autoincrement())
-  warehouse String    @default("trifaxic")
+  warehouse String    @default("general")
   products  Product[]
 }
 
 model Ventas {
   id        String   @id @unique
   client    String
-  cant      String?
   products  String
   payment   String?
   total     Float    @default(0)
@@ -91,7 +65,8 @@ model Ventas {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   source    String?  @default("form-Ventas")
-  Persona   Persona  @relation(fields: [client], references: [id])
+  quantity  Int?     @default(1)
+  Persona   Client   @relation(fields: [client], references: [id])
   Product   Product  @relation(fields: [products], references: [id])
 }
 
@@ -123,11 +98,11 @@ model Log {
   ip        String?
   context   String
   notes     String
-  terror    Boolean? @default(false)
   img       String?
   source    String?  @default("form-log")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  error     Boolean? @default(false)
 }
 
 model Tasks {
@@ -142,4 +117,68 @@ model Tasks {
   source    String?  @default("form-finance")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Client {
+  id        String   @id @unique
+  fullname  String
+  email     String?  @unique
+  tel       String?
+  city      String?  @default("valencia")
+  img       String?
+  notes     String?
+  source    String?  @default("form-client")
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+  Ventas    Ventas[]
+}
+
+model ListEmail {
+  id        Int      @id @default(autoincrement())
+  fullname  String?
+  email     String?
+  tel       String?
+  message   String?
+  source    String?  @default("form-list-email")
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+}
+
+model Partner {
+  id          String   @id @unique
+  fullname    String
+  description String
+  address     String
+  sector      String
+  website     String?
+  social      String
+  email       String   @unique
+  tel         String
+  city        String   @default("valencia")
+  country     String?  @default("venezuela")
+  state       String?  @default("carabobo")
+  zip         String?  @default("2001")
+  img         String?
+  since       String
+  notes       String?
+  source      String?  @default("form-partner")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+}
+
+model Provider {
+  id        String   @id @unique
+  fullname  String
+  address   String?
+  city      String?  @default("Valencia")
+  email     String?
+  tel       String
+  sector    String?
+  img       String?
+  credit    String?  @default("cash")
+  historial String?
+  notes     String?
+  source    String?  @default("form-provider")
+  createdAt DateTime @default(now())
+  updatedAt DateTime
 }
