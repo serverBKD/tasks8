@@ -2,11 +2,11 @@ import Image from "next/image";
 // import { IconsBarcode } from "../../public/icons/icons-hugeicons";
 
 export default function CardTasks({ tasks }) {
-	console.log("CardTasks", tasks);
+	console.log("fromCardTasks", tasks);
 	return (
 		<section className="card_container">
 			{tasks?.map((task) => (
-				<article className="card_box" key={task.id}>
+				<article className="card_box" key={task?.id-Math.random()}>
 					{/* Imagen */}
 					<div className="w-full">
 						{task?.img && (

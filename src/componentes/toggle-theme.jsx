@@ -5,12 +5,11 @@ export default function ToggleTheme() {
   const [theme, setTheme] = useState('dark');
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
       const storedTheme = localStorage.getItem('theme');
       if (storedTheme) {
         setTheme(storedTheme);
       }
-    }}, []);
+    }, []);
 
 
   const HandleTheme = () => {

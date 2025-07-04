@@ -18,7 +18,7 @@ type FormData = {
 };
 
 interface Task {
-	id?: string;
+	id?: number;
 	concept?: string;
 	amount?: number;
 	debit?: string;
@@ -31,7 +31,7 @@ interface Task {
 //! Tasks
 
 export async function GetTasks() {
-	const $Task = await prisma.Tasks.findMany({
+	const _getAllTasks = await prisma.Tasks.findMany({
 		orderBy: [
 			{
 				completed: "asc",
@@ -41,13 +41,13 @@ export async function GetTasks() {
 			},
 		],
 	});
-	return $Task;
+	return _getAllTasks;
 }
 
-export async function AddTask($AddTask: Task) {
-	const { concept, amount, debit, img, notes, initAt } = $AddTask;
+export async function AddTask(AddTask: Task) {
+	const { concept, amount, debit, img, notes, initAt } = AddTask;
 	try {
-		const $newTask = await prisma.Tasks.create({
+		const _newTask = await prisma.Tasks.create({
 			data: {
 				concept,
 				amount,
@@ -58,9 +58,9 @@ export async function AddTask($AddTask: Task) {
 				initAt,
 			},
 		});
-		if (!$newTask) return;
+		if (!_newTask) return;
 		revalidatePath("/");
-		return $newTask;
+		return _newTask;
 	} catch (error) {
 		console.error(error);
 		return { message: "Error adding task" };

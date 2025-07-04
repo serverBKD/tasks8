@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 export default function ListTasks({ tasks }) {
+	console.log("fromCardLists", tasks);
+
 	const router  = useRouter();
 
 	const handleToggleTask = async (task) => {
