@@ -1,5 +1,5 @@
 "use client";
-import { toUpdateTask } from "../app/server/actions.ts";
+import { UpdateTask } from "../app/server/actions.ts";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -7,22 +7,22 @@ export default function ListTasks({ tasks }) {
 	const router  = useRouter();
 
 	const handleToggleTask = async (task) => {
-		await toUpdateTask(task);
+		await UpdateTask(task);
 		router.refresh();
 		return;
 	};
 
 	return (
-		<section className="card_width h-fit mx-auto flex flex-col items-center bg-1-bg">
-			<ul className="w-full px-2 py-1 gap-y-1 mb-2">
+		<section className="card_container">
+			<ul className="card_list">
 				{tasks.map((task) => (
 					<div
 						key={task?.id}
-						className="flex flex-col justify-between py-1 text-2xl"
+						className=""
 					>
 						<div
 							className={`${
-								task?.debit ? "bg-1-error text-1-text" : "bg-1-link"
+								task?.debit ? "bg-x-error text-light-text" : "bg-x-link"
 							} w-full flex items-center justify-between px-2 py-4`}
 						>
 							<p className="">{task.amount}</p>
@@ -38,7 +38,7 @@ export default function ListTasks({ tasks }) {
 								type="button"
 								aria-label="Toggle task completion"
 								onClick={() => handleToggleTask(task)}
-								className="cursor-pointer bg-inherit text-1-bg"
+								className="cursor-pointer bg-inherit text-dark-bg"
 							>
 								{!task.completed ? "✔️" : "❌"}
 							</button>

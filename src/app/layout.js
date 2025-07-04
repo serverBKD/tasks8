@@ -10,7 +10,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body
-        className={`${OrbitronBlackFont.variable} antialiased bg-1-bg text-1-text`}
+        className={`${OrbitronBlackFont.variable} antialiased bg-dark-bg text-light-text`}
       >
         {children}
       </body>

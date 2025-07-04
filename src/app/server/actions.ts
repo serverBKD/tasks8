@@ -30,7 +30,7 @@ interface Task {
 
 //! Tasks
 
-export async function toGetTasks() {
+export async function GetTasks() {
 	const $Task = await prisma.Tasks.findMany({
 		orderBy: [
 			{
@@ -44,7 +44,7 @@ export async function toGetTasks() {
 	return $Task;
 }
 
-export async function toAddTask($AddTask: Task) {
+export async function AddTask($AddTask: Task) {
 	const { concept, amount, debit, img, notes, initAt } = $AddTask;
 	try {
 		const $newTask = await prisma.Tasks.create({
@@ -67,7 +67,7 @@ export async function toAddTask($AddTask: Task) {
 	}
 }
 
-export async function toUpdateTask(updateTask: Task) {
+export async function UpdateTask(updateTask: Task) {
 	const { id, completed } = updateTask;
 	if (!id) return;
 	const existingTask = await prisma.Tasks.findFirst({
@@ -90,7 +90,7 @@ export async function toUpdateTask(updateTask: Task) {
   return
 }
 
-export async function toDeleteTask(deleteTask: Task) {
+export async function DeleteTask(deleteTask: Task) {
 	const existingTask = await prisma.Tasks.findFirst({
 		where: {
 			concept: `${deleteTask}`,
@@ -107,7 +107,7 @@ export async function toDeleteTask(deleteTask: Task) {
 
 //! Image -> Firebase Storage
 
-export async function toAddImage(payload: FormData) {
+export async function AddImage(payload: FormData) {
 	const $CATEGORY = payload.get("category") || "server241";
 	const $IMAGE = payload.get("img");
 	if (typeof $IMAGE !== "string" && $IMAGE?.name) {
@@ -155,4 +155,4 @@ export async function toAddImage(payload: FormData) {
 	}
 }
 
-//TODO: hacer function separada a firebase: 02-11-24
+//TODO: hacer function separada a firebase: 02-1x-24

@@ -20,10 +20,10 @@ export default function CardTasks({ tasks }) {
 						)}
 					</div>
 					{/* <!-- Card like YT --> */}
-					<div className="card_text">
+					<div className="card_info">
 						<h4
 							className={`${
-								task.amount < 0 ? "text-1-error" : "text-x-color"
+								task.amount < 0 ? "text-x-error" : "text-x-color"
 							} tracking-wider text-3xl`}
 						>
 							{task.amount === 0 ? 0 : task.amount}
