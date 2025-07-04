@@ -92,7 +92,7 @@ export default function BoxInput() {
         debit: parseFloat(partTask[0]) < 0 ?? false,
         notes: partTask[1].includes("kyrye") ? partTask[0] : "",
         img: image,
-        initAt: $FormattedDate,
+        initAt: FormattedDate,
         amount: parseFloat(partTask[0]) || 0,
       };
     } else {
@@ -100,7 +100,7 @@ export default function BoxInput() {
         concept: newTask,
         debit: false,
         img: image,
-        initAt: $FormattedDate,
+        initAt: FormattedDate,
         amount: parseFloat(newTask) || 0,
       };
     }
@@ -174,3 +174,5 @@ export default function BoxInput() {
     </section>
   );
 }
+
+//TODO: Tailwind CSS -> CSS native
