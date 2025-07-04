@@ -13,10 +13,10 @@ export default function ListTasks({ tasks }) {
 	};
 
 	return (
-		<section className="card h-fit mx-auto flex flex-col items-center bg-1-bg">
+		<section className="card_width h-fit mx-auto flex flex-col items-center bg-1-bg">
 			<ul className="w-full px-2 py-1 gap-y-1 mb-2">
 				{tasks.map((task) => (
-					<di
+					<div
 						key={task?.id}
 						className="flex flex-col justify-between py-1 text-2xl"
 					>
@@ -46,15 +46,15 @@ export default function ListTasks({ tasks }) {
 						<div>
 							{task?.img && !task.completed && (
 								<Image
-									src={task.img}
+									src={task?.img}
 									width={640}
 									height={640}
 									alt={task?.concept}
-									className="w-full h-64 object-cover"
+									className="card_image"
 								/>
 							)}
 						</div>
-					</di>
+					</div>
 				))}
 			</ul>
 		</section>

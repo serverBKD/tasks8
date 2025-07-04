@@ -128,7 +128,7 @@ const TaskPage = () => {
     <section
       className={`${OrbitronBlackFont.className} w-full min-h-screen lg:pt-4 flex flex-col justify-start overflow-hidden tracking-wider text-1-text bg-1-bg`}
     >
-      <article className="card h-fit mx-auto">
+      <article className="card_width h-fit mx-auto">
         <h1 className="text-center pt-8 pb-2 text-4xl">
           Tasks Manager
         </h1>
