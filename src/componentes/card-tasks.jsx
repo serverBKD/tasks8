@@ -21,17 +21,17 @@ export default function CardTasks({ tasks }) {
           {/* <!-- Card like YT --> */}
           <div className="card_info">
             <p
+              id="task-concept-card"
               style={{
                 textDecoration: task?.completed ? "line-through" : "none",
               }}
             >
               {task.concept}
             </p>
-            <h4 className={`${task.amount < 0 ? "text-x-error" : "text-x-color"} tracking-wider text-3xl`}>
-              {task.amount === 0 ? 0 : task.amount}
-            </h4>
-
-            <p>{task?.initAt}</p>
+            <p id="task-amount-card" className={`${task.amount < 0 ? "text-x-error" : "text-x-hover"} `}>
+              USD({task.amount === 0 ? 0 : task.amount})
+            </p>
+            <p id="task-date-card">{task?.initAt}</p>
           </div>
           {/* <!-- Card like YT --> */}
           <LinkBar />

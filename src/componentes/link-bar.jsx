@@ -4,25 +4,16 @@ import Link from "next/link.js";
 
 export default function LinkBar() {
   return (
-    <section className="w-full flex flex-wrap gap-2 justify-evenly items-center ">
-      <Link
-        href="/"
-        className="w-28 h-12 flex items-center justify-start px-2 py-4 outline-2 outline-x-link text-x-link rounded-lg shadow-md hover:cursor-pointer hover:bg-x-link/10 transition-all duration-300"
-      >
+    <section className="box_link_bar">
+      <Link href="/" className="link_bar_card text-x-link outline-2 outline-x-link hover:bg-x-link/30">
         <GlobeIcon />
         <h3 className="text-xs">SOURCE</h3>
       </Link>
-      <Link
-        href="/"
-        className="w-28 h-12 flex items-center justify-start px-2 py-4 outline-2 outline-x-success text-x-success rounded-lg shadow-md hover:cursor-pointer hover:bg-x-link/10 transition-all duration-300"
-      >
+      <Link href="/" className="link_bar_card text-x-success outline-2 outline-x-success hover:bg-x-success/30">
         <GitHubIcon />
         <h3 className="text-xs">REPO</h3>
       </Link>
-      <Link
-        href="/"
-        className="w-28 h-12 flex items-center justify-start px-2 py-4 outline-2 outline-x-accent text-x-accent rounded-lg shadow-md hover:cursor-pointer hover:bg-x-link/10 transition-all duration-300"
-      >
+      <Link href="/" className="link_bar_card text-x-accent outline-2 outline-x-accent hover:bg-x-accent/30">
         <YouTubeIcon />
         <h3 className="text-xs">VIDEO</h3>
       </Link>

@@ -1,11 +1,6 @@
 "use client";
-import {useDebounce} from "../services/hooks.ts";
-import {
-  AddImage,
-  AddTask,
-  GetTasks,
-  DeleteTask,
-} from "../app/server/actions.ts";
+import { useDebounce } from "../services/hooks.ts";
+import { AddImage, AddTask, GetTasks, DeleteTask } from "../app/server/actions.ts";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import ListTasks from "../componentes/list-tasks.jsx";
@@ -14,20 +9,7 @@ import BoxWord from "../componentes/box-word.jsx";
 
 const FormattedDate = () => {
   const date = new Date(Date.now());
-  const months = [
-    "JAN",
-    "FEB",
-    "MAR",
-    "APR",
-    "MAY",
-    "JUN",
-    "JUL",
-    "AUG",
-    "SEP",
-    "OCT",
-    "NOV",
-    "DEC",
-  ];
+  const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
   const day = date.getDate().toString().padStart(2, "0");
   const month = months[date.getMonth()];
   const year = date.getFullYear().toString().slice(-2);
@@ -73,7 +55,7 @@ export default function BoxInput() {
   const handleAddTask = async () => {
     if (newTask.trim() === "") return;
 
-    if (newTask.includes(":")) {
+    if (handleInputChange.includes(":")) {
       const partTask = newTask.split(":");
 
       if (partTask[1] === "del") return await DeleteTask(partTask[0]);
@@ -168,9 +150,7 @@ export default function BoxInput() {
         <BoxWord Phrase={Phrase} />
       </article>
       {/* <!-- Tasks --> */}
-      <section className="w-full max-w-7xl mx-auto bg-dark-bg">
-        {!isCard ? <CardTasks tasks={tasks} /> : <ListTasks tasks={tasks} />}
-      </section>
+      <section>{!isCard ? <CardTasks tasks={tasks} /> : <ListTasks tasks={tasks} />}</section>
     </section>
   );
 }

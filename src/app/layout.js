@@ -1,5 +1,5 @@
 import "./globals.css";
-import {OrbitronBlackFont} from '../services/fonts/fonts.js'
+import { OrbitronBlackFont } from "../services/fonts/fonts.js";
 
 export const metadata = {
   title: "Task Manager",
@@ -9,13 +9,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="es">
-      <body
-        className={`${OrbitronBlackFont.className} antialiased bg-dark-bg text-light-text`}
-      >
-        {children}
-      </body>
+      <body className={`${OrbitronBlackFont.className} antialiased `}>{children}</body>
     </html>
   );
 }
-
-
