@@ -4,7 +4,7 @@
   --color-x-color: #6200ea; /* Placeholder for custom color variable */
   --color-dark-bg: #121212;
   --color-dark-2-bg: #1e1e1e;
-  --color-light-bg: #ffffff;
+  --color-light-bg: #f1f1f1;
   --color-dark-text: #040404;
   --color-light-text: #ffffff;
   --color-light-2-text: #a0a0a0;
@@ -34,8 +34,8 @@
   padding-top: 1rem; /* 16px */
   box-sizing: border-box; /* Ensure padding is included in width */
   overflow: hidden;
-  background-color: var(--color-dark-bg);
-  color: var(--color-light-text);
+  background-color: var(--color-light-bg);
+  color: var(--color-dark-text);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -52,7 +52,7 @@
 h1{
   font-size: 2.5rem; /* 40px */
   font-weight: 700; /* Bold */
-  color: var(--color-light-text);
+  color: var(--color-dark-text);
   text-align: center;
   padding-top: 2rem; /* 32px */
   padding-bottom: 1rem; /* 16px */
@@ -65,11 +65,11 @@ h1{
   width: 100%;
   margin: 0 auto;
   min-height: 100vh;
-  background-color: var(--color-x-bg);
+  background-color: var(--color-light-bg);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   gap: 1rem; /* 16px */
   padding: 1rem; /* 16px */
 }
@@ -81,7 +81,7 @@ h1{
   flex-direction: column;
   /* justify-content: space-between; */
   gap: 3px 0px;
-  background-color: var(--color-dark-bg);
+  background-color: var(--color-light-bg);
 }
 
 .card_box {
@@ -89,7 +89,7 @@ h1{
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: start;
   margin: 0 auto;
   border-radius: 0.5rem; /* 8px */
   /* overflow: hidden; */
@@ -97,8 +97,9 @@ h1{
   transition: transform 0.3s ease;
 }
 
+/* TODO */
 .card {
-  min-height: 320px; /* 288px */
+  min-height: 420px; /* 288px */
   background-color: var(--color-x-link);
   border-radius: 0.5rem; /* 8px */
 }
@@ -107,9 +108,10 @@ h1{
   width: 100%;
   height: 16rem; /* 64 * 0.25rem */
   object-fit: cover;
+  border-radius: 0.5rem; /* 8px */
 
   &:hover {
-    height: 100dvh;
+    height: 50dvh;
     transition: height 0.4s ease-in-out;
     cursor: pointer;
   }
@@ -118,17 +120,20 @@ h1{
 .card_info {
   width: 100%;
   height: fit-content;
-  min-height: 240px;
-  max-height: 320px;
+  min-height: 180px;
+  max-height: 240px;
   line-height: 1.5;
   padding: 0 0 0 1rem; /* 16px */
   overflow: hidden;
   text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  background-color: var(--color-2-text);
+  background-color: var(--color-light-bg);
   color: var(--color-dark-text);
   font-size: 1.25rem; /* 20px */
+  border-radius: 0 0 0.5rem 0.5rem; /* 8px */ /*TODO*/
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: start;
 }
 
 .box_input {
@@ -149,7 +154,7 @@ h1{
 footer {
   width: 100%;
   padding: 1rem; /* 16px */
-  background-color: var(--color-dark-bg);
+  background-color: var(--color-light-bg);
   color: var(--color-light-text);
   text-align: center;
   font-size: .7rem; /* 16px */
