@@ -1,4 +1,5 @@
 "use client";
+import {useDebounce} from "../services/hooks.ts";
 import {
   AddImage,
   AddTask,
@@ -32,7 +33,6 @@ const FormattedDate = () => {
   const year = date.getFullYear().toString().slice(-2);
   return `${day}${month}${year}`;
 };
-
 const _FormattedDate = FormattedDate();
 
 export default function BoxInput() {
@@ -66,9 +66,7 @@ export default function BoxInput() {
     return;
   };
 
-  const handleInputChange = (e) => {
-    setNewTask(e.target.value);
-  };
+  const handleInputChange = useDebounce(newTask, 500);
 
   let task = {};
 
@@ -135,7 +133,9 @@ export default function BoxInput() {
             <input
               type="text"
               value={newTask}
-              onChange={handleInputChange}
+              onChange={(e) => {
+                setNewTask(e.target.value);
+              }}
               placeholder="+ new task"
               className="w-full h-24 bg-x-link focus:bg-x-accent focus:text-dark-text text-2xl pl-2 py-2 placeholder-dark-text placeholder:pl-2 focus-visible:border-0 focus-visible:outline-none focus-visible:ring-0 sm:rounded-tl-lg"
             />
@@ -167,10 +167,10 @@ export default function BoxInput() {
         </section>
         <BoxWord Phrase={Phrase} />
       </article>
-        {/* <!-- Tasks --> */}
-        <section className="w-full max-w-7xl mx-auto bg-dark-bg">
-          {!isCard ? <CardTasks tasks={tasks} /> : <ListTasks tasks={tasks} />}
-        </section>
+      {/* <!-- Tasks --> */}
+      <section className="w-full max-w-7xl mx-auto bg-dark-bg">
+        {!isCard ? <CardTasks tasks={tasks} /> : <ListTasks tasks={tasks} />}
+      </section>
     </section>
   );
 }

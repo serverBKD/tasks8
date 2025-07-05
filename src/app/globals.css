@@ -65,7 +65,7 @@ h1{
   width: 100%;
   margin: 0 auto;
   min-height: 100vh;
-  background-color: var(--color-x-accent);
+  background-color: var(--color-x-bg);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
