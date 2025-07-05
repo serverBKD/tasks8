@@ -1,12 +1,14 @@
 // 02-JUL-2025
 // Redeploy on Vercel: https://hanyu-h1.vercel.app/
 
-//TODO Tailwind v4
+//TODO Tailwind v4 ✅
 
-//TODO  Clean action.js for only hanyu app funtions
+//TODO  Clean action.js for only hanyu app funtions ✅
 
-//TODO Color UI
+//TODO Color UI ✅
 
-//TODO SEO Metadata + Icon
+//TODO SEO Metadata + Icon ✅⁉️
 
-//TODO Actualizacion automatica de Componentes
+//TODO Actualizacion automatica de Componentes ✅⁉️
+
+//TODO Filtrado de tareas por fecha, cantidad, etc. 05-JUL-2025 ⁉️

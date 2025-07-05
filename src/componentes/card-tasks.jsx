@@ -28,8 +28,8 @@ export default function CardTasks({ tasks }) {
             >
               {task.concept}
             </p>
-            <p id="task-amount-card" className={`${task.amount < 0 ? "text-x-error" : "text-x-hover"} `}>
-              USD({task.amount === 0 ? 0 : task.amount})
+            <p id="task-amount-card" className={`${task.amount < 0 ? "text-x-error" : "text-dark-bg"} `}>
+              USD({task.amount === 0 ? "zero" : task.amount})
             </p>
             <p id="task-date-card">{task?.initAt}</p>
           </div>
