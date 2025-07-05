@@ -31,7 +31,7 @@ export default function CardTasks({ tasks }) {
               {task.amount === 0 ? 0 : task.amount}
             </h4>
 
-            <h5>{task?.initAt}</h5>
+            <p>{task?.initAt}</p>
           </div>
           {/* <!-- Card like YT --> */}
           <LinkBar />
