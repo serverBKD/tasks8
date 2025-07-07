@@ -1,4 +1,4 @@
-import { OrbitronBlackFont } from "../services/fonts/fonts.js";
+import { OrbitronBlackFont } from "../services/fonts/fonts.js"
 
 export default function BoxWord({Phrase}) {
   return (
@@ -9,5 +9,5 @@ export default function BoxWord({Phrase}) {
         {Phrase}
       </h2>
     </section>
-  );
+  )
 }

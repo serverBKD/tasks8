@@ -1,11 +1,12 @@
-import Image from "next/image";
-import LinkBar from "../componentes/link-bar.jsx";
-// import { IconsBarcode } from "../../public/icons/icons-hugeicons";
+import Image from "next/image"
+import LinkBar from "../componentes/link-bar.jsx"
+// import { IconsBarcode } from "../../public/icons/icons-hugeicons"
+// import { toast } from "sonner"
 
-const ImagePlaceholder = "/assets/placeholder-image.webp"; // Placeholder image path
+const ImagePlaceholder = "/assets/placeholder-image.webp" // Placeholder image path
 
 export default function CardTasks({ tasks }) {
-  console.log("fromCardTasks", tasks);
+  console.log("fromCardTasks", tasks)
   return (
     <section className="card_container">
       {tasks?.map((task) => (
@@ -34,9 +35,10 @@ export default function CardTasks({ tasks }) {
             <p id="task-date-card">{task?.initAt}</p>
           </div>
           {/* <!-- Card like YT --> */}
+
           <LinkBar />
         </article>
       ))}
     </section>
-  );
+  )
 }

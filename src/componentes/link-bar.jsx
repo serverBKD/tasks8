@@ -1,6 +1,6 @@
-"use client";
-import { GlobeIcon, YouTubeIcon, GitHubIcon } from "../services/iconos.js";
-import Link from "next/link.js";
+"use client"
+import { GlobeIcon, YouTubeIcon, GitHubIcon } from "../services/iconos.js"
+import Link from "next/link.js"
 
 export default function LinkBar() {
   return (
@@ -18,5 +18,5 @@ export default function LinkBar() {
         <h3 className="text-xs">VIDEO</h3>
       </Link>
     </section>
-  );
+  )
 }

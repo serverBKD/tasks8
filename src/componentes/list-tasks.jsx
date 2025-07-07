@@ -1,18 +1,18 @@
-"use client";
-import { UpdateTask } from "../app/server/actions.ts";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
+"use client"
+import { UpdateTask } from "../app/server/actions.ts"
+import Image from "next/image"
+import { useRouter } from "next/navigation"
 
 export default function ListTasks({ tasks }) {
-  console.log("fromCardLists", tasks);
+  console.log("fromCardLists", tasks)
 
-  const router = useRouter();
+  const router = useRouter()
 
   const handleToggleTask = async (task) => {
-    await UpdateTask(task);
-    router.refresh();
-    return;
-  };
+    await UpdateTask(task)
+    router.refresh()
+    return
+  }
 
   return (
     <section className="card_container">
@@ -51,5 +51,5 @@ export default function ListTasks({ tasks }) {
         ))}
       </ul>
     </section>
-  );
+  )
 }
