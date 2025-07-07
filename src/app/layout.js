@@ -6,10 +6,12 @@ export const metadata = {
     description: 'Task Manager [T-8] app'
 }
 
-export default function RootLayout ({ children }) {
+export default function RootLayout({ children }) {
     return (
         <html lang='es'>
-            <body className={`${OrbitronBlackFont.className} antialiased `}>{children}</body>
+            <body className={`${OrbitronBlackFont.className} antialiased `}>
+                {children}
+            </body>
         </html>
     )
 }

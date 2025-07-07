@@ -1,6 +1,12 @@
 {
-	"vcs": { "enabled": false, "clientKind": "git", "useIgnoreFile": false },
-	"files": { "ignoreUnknown": false },
+	"vcs": {
+		"enabled": false,
+		"clientKind": "git",
+		"useIgnoreFile": false
+	},
+	"files": {
+		"ignoreUnknown": false
+	},
 	"formatter": {
 		"enabled": true,
 		"formatWithErrors": false,
@@ -13,7 +19,12 @@
 		"bracketSpacing": true,
 		"expand": "auto"
 	},
-	"linter": { "enabled": true, "rules": { "recommended": false } },
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": false
+		}
+	},
 	"javascript": {
 		"formatter": {
 			"jsxQuoteStyle": "single",
@@ -27,9 +38,17 @@
 			"bracketSpacing": true
 		}
 	},
-	"html": { "formatter": { "selfCloseVoidElements": "always" } },
+	"html": {
+		"formatter": {
+			"selfCloseVoidElements": "always"
+		}
+	},
 	"assist": {
 		"enabled": true,
-		"actions": { "source": { "organizeImports": "on" } }
+		"actions": {
+			"source": {
+				"organizeImports": "on"
+			}
+		}
 	}
 }

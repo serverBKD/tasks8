@@ -6,5 +6,8 @@ export const OrbitronBlackFont = localFonts({
     weight: '400',
     style: 'normal',
     preload: true,
-    fallback: ['Arial', 'sans-serif']
+    fallback: [
+        'Arial',
+        'sans-serif'
+    ]
 })

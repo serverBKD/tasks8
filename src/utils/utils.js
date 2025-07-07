@@ -1,12 +1,11 @@
-import * as React from 'react'
 import { useDebounce } from '@uidotdev/usehooks'
 import searchHackerNews from './searchHackerNews'
-import SearchResults from './SearchResults'
+import { useEffect, useState } from 'react'
 
-export default function App () {
-    const [searchTerm, setSearchTerm] = React.useState('js')
-    const [results, setResults] = React.useState([])
-    const [isSearching, setIsSearching] = React.useState(false)
+export default function App() {
+    const [searchTerm, setSearchTerm] = useState('js')
+    const [results, setResults] = useState([])
+    const [isSearching, setIsSearching] = useState(false)
     const debouncedSearchTerm = useDebounce(searchTerm, 300)
 
     const handleChange = (e) => {
@@ -21,7 +20,7 @@ export default function App () {
         e.target.focus()
     }
 
-    React.useEffect(() => {
+    useEffect(() => {
         const searchHN = async () => {
             let results = []
             setIsSearching(true)
@@ -35,7 +34,9 @@ export default function App () {
         }
 
         searchHN()
-    }, [debouncedSearchTerm])
+    }, [
+        debouncedSearchTerm
+    ])
 
     return (
         <section>
@@ -45,10 +46,16 @@ export default function App () {
                     <input
                         name='search'
                         placeholder='Search HN'
-                        style={{ background: 'var(--charcoal)' }}
+                        style={{
+                            background: 'var(--charcoal)'
+                        }}
                         onChange={handleChange}
                     />
-                    <button className='primary' disabled={isSearching} type='submit'>
+                    <button
+                        className='primary'
+                        disabled={isSearching}
+                        type='submit'
+                    >
                         {isSearching ? '...' : 'Search'}
                     </button>
                 </form>

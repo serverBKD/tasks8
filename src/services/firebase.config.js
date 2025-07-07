@@ -14,7 +14,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig)
 const storage = getStorage(app)
 
-export async function upImages (bytes, name) {
+export async function upImages(bytes, name) {
     const storageRef = ref(storage, `tasks-t8/${name}`)
     // const folderRef = storageRef.child('')
 
