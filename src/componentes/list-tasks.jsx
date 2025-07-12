@@ -10,7 +10,7 @@ export default function ListTasks({ tasks }) {
 
 	const handleToggleTask = async (task) => {
 		await UpdateTask(task)
-		router.refresh()
+		router.push('/')
 		return
 	}
 

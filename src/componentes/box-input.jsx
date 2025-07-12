@@ -13,7 +13,7 @@ import CardTasks from '../componentes/card-tasks.jsx'
 import BoxWord from '../componentes/box-word.jsx'
 
 const FormattedDate = () => {
-	const date = new Date(Date.now())
+	const date = new Date( Date.now() )
 	const months = [
 		'JAN',
 		'FEB',
@@ -28,72 +28,77 @@ const FormattedDate = () => {
 		'NOV',
 		'DEC',
 	]
-	const day = date.getDate().toString().padStart(2, '0')
-	const month = months[date.getMonth()]
-	const year = date.getFullYear().toString().slice(-2)
-	return `${day}${month}${year}`
+	const day = date.getDate().toString().padStart( 2, '0' )
+	const month = months[ date.getMonth() ]
+	const year = date.getFullYear().toString().slice( -2 )
+	return `${ day }${ month }${ year }`
 }
 const _FormattedDate = FormattedDate()
 
 export default function BoxInput() {
 	const router = useRouter()
+	const [ tasks, setTasks ] = useState( [] )
+	const [ newTask, setNewTask ] = useState( '' )
+	const [ image, setImg ] = useState( '' )
+	const [ isList, setIsList ] = useState( true )
 
-	const [Phrase, setPhrase] = useState('Phrase')
+	const [ Phrase, setPhrase ] = useState( 'Phrase' )
 
-	useEffect(() => {
+	useEffect( () => {
 		const _getTasks = async () => {
 			const _tasksInitial = await GetTasks()
-			setTasks(_tasksInitial)
-			setPhrase(localStorage.getItem('phrase'))
+			setTasks( _tasksInitial )
+			setPhrase( localStorage.getItem( 'phrase' ) )
+			router.push( '/' )
+			return
 		}
 		_getTasks()
-	}, [])
+	}, [ tasks ] )
 
-	const [tasks, setTasks] = useState([])
-	const [newTask, setNewTask] = useState('')
-	const [image, setImg] = useState('')
-	const [isCard, setIsCard] = useState(false)
+
 
 	//! Save the image on the cloud
-	const handleUpImage = async (evt) => {
-		const file = evt.target.files[0]
+	const handleUpImage = async ( evt ) => {
+		const file = evt.target.files[ 0 ]
 		const formData = new FormData()
-		formData.append('img', file)
-		formData.append('category', 'tasks-app')
-		const imgUrl = await AddImage(formData)
-		setImg(imgUrl.message)
-		console.log({
+		formData.append( 'img', file )
+		formData.append( 'category', 'tasks-app' )
+		const imgUrl = await AddImage( formData )
+		setImg( imgUrl.message )
+		console.log( {
 			imgUrl,
-		})
+		} )
 		return
 	}
 
-	const handleInputChange = useDebounce(newTask, 500)
+	const handleInputChange = useDebounce( newTask, 500 )
 
 	let task = {}
 
 	const handleAddTask = async () => {
-		if (newTask.trim() === '') return
+		if ( newTask.trim() === '' ) return
 
-		if (handleInputChange.includes(':')) {
-			const partTask = newTask.split(':')
+		if ( handleInputChange.includes( ':' ) ) {
+			const partTask = newTask.split( ':' )
 
-			if (partTask[1] === 'del') return await DeleteTask(partTask[0])
+			if ( partTask[ 1 ] === 'del' ) {
+				await DeleteTask( partTask[ 0 ] )
+			}
 
-			if (partTask[1] === 'kyrye') {
-				setPhrase(partTask[0])
+			if ( partTask[ 1 ] === 'kyrye' ) {
+				setPhrase( partTask[ 0 ] )
 				// guardar el nombre en el localStorage o en una base de datos
-				localStorage.setItem('phrase', partTask[0])
+				localStorage.setItem( 'phrase', partTask[ 0 ] )
 				return
 			}
 
 			task = {
-				concept: partTask[1],
-				debit: parseFloat(partTask[0]) < 0 ?? false,
-				notes: partTask[1].includes('kyrye') ? partTask[0] : '',
+				concept: partTask[ 1 ],
+				debit: parseFloat( partTask[ 0 ] ) < 0 ?? false,
+				notes: partTask[ 1 ].includes( 'kyrye' ) ? partTask[ 0 ] : '',
 				img: image,
 				initAt: _FormattedDate,
-				amount: parseFloat(partTask[0]) || 0,
+				amount: parseFloat( partTask[ 0 ] ) || 0,
 			}
 		} else {
 			task = {
@@ -101,33 +106,33 @@ export default function BoxInput() {
 				debit: false,
 				img: image,
 				initAt: _FormattedDate,
-				amount: parseFloat(newTask) || 0,
+				amount: parseFloat( newTask ) || 0,
 			}
 		}
 
-		setTasks([
+		setTasks( [
 			...tasks,
 			task,
-		])
-		setNewTask('')
+		] )
+		setNewTask( '' )
 
 		try {
-			const addTask = await AddTask(task)
-			console.log({
+			const addTask = await AddTask( task )
+			console.log( {
 				addTask,
-			})
-			setImg('')
-			router.refresh()
+			} )
+			setImg( '' )
+			router.push( '/' )
 			return
-		} catch (error) {
-			console.error(error)
+		} catch ( error ) {
+			console.error( error )
 		}
 	}
 
 	//! Select between Card and List
-	const handleIsCard = (evt) => {
+	const handleIsList = ( evt ) => {
 		evt.preventDefault()
-		setIsCard(!isCard)
+		setIsList( !isList )
 		return
 	}
 
@@ -140,22 +145,24 @@ export default function BoxInput() {
 	return (
 		<section>
 			<article className='box_input'>
-				{/* <!-- Word of Week --> */}
+				{/* <!-- Word of Week --> */ }
 				<section className='flex flex-col pt-4 '>
 					<div className='flex justify-between'>
 						<input
 							type='text'
-							value={newTask}
-							onChange={(e) => {
-								setNewTask(e.target.value)
-							}}
+							id='newTask'
+							value={ newTask }
+							onChange={ ( e ) => {
+								setNewTask( e.target.value )
+							} }
 							placeholder='+ new task'
-							className='w-full h-24 bg-x-link focus:bg-x-accent focus:text-dark-text text-2xl pl-2 py-2 placeholder-dark-text placeholder:pl-2 focus-visible:border-0 focus-visible:outline-none focus-visible:ring-0 sm:rounded-tl-lg'
 						/>
 						<button
 							type='button'
-							onClick={handleAddTask}
-							className='w-48 h-24 bg-x-link hover:bg-x-accent text-dark-text text-6xl font-bold cursor-pointer sm:rounded-tr-lg'
+							id='btn-add-task'
+							disabled={ !newTask }
+							aria-label='Add new task'
+							onClick={ handleAddTask }
 						>
 							+
 						</button>
@@ -164,29 +171,30 @@ export default function BoxInput() {
 						type='file'
 						name='img'
 						id='img'
-						className='<input type="file" class="block w-full text-xs bg-x-link hover:file:bg-x-accent file:mr-2 file:px-4 file:py-1 file:border-0 file:placeholder:text-x-link" />'
-						onChange={(evt) => handleUpImage(evt)}
+						className='input-file'
+						onChange={ ( evt ) => handleUpImage( evt ) }
 						accept='image/png, image/jpeg, image/jpg'
 					/>
 				</section>
-				{/* <!-- isCard - isList --> */}
+				{/* <!-- isCard - isList --> */ }
 				<section className='w-full'>
 					<input
 						type='button'
-						value={isCard ? 'List' : 'Cards'}
-						onClick={(evt) => handleIsCard(evt)}
+						value={ setIsList ? 'List' : 'Cards' }
+						onClick={ ( evt ) => handleIsList( evt ) }
 						className='w-full h-24 py-2 cursor-pointer uppercase text-center text-2xl font-bold sm:rounded-b-xl bg-x-link hover:bg-x-hover'
 					/>
 				</section>
-				<BoxWord Phrase={Phrase} />
+				<BoxWord Phrase={ Phrase } />
 			</article>
-			{/* <!-- Tasks --> */}
+			{/* <!-- Tasks --> */ }
 			<section>
-				{!isCard ? (
-					<CardTasks tasks={tasks} />
+				{ isList ? (
+					<ListTasks tasks={ tasks } />
+
 				) : (
-					<ListTasks tasks={tasks} />
-				)}
+					<CardTasks tasks={ tasks } />
+				) }
 			</section>
 		</section>
 	)

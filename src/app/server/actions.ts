@@ -57,7 +57,8 @@ export async function AddTask(AddTask: Task) {
 				source: 'form-task',
 				initAt,
 			},
-		})
+		} )
+		console.log('New Task Added:', _newTask)
 		if (!_newTask) return
 		revalidatePath('/')
 		return _newTask
@@ -69,7 +70,9 @@ export async function AddTask(AddTask: Task) {
 	}
 }
 
-export async function UpdateTask(updateTask: Task) {
+export async function UpdateTask( updateTask: Task ) {
+	if ( !updateTask || typeof updateTask !== 'object' ) return
+	console.log('UpdateTask', updateTask)
 	const { id, completed } = updateTask
 	if (!id) return
 	const existingTask = await prisma.Tasks.findFirst({
@@ -103,7 +106,8 @@ export async function DeleteTask(deleteTask: Task) {
 		where: {
 			id: existingTask.id,
 		},
-	})
+	} )
+	revalidatePath('/')
 	return deletedTASK
 }
 
