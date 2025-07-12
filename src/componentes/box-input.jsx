@@ -146,7 +146,7 @@ export default function BoxInput() {
 
 	return (
 		<section>
-			<article className='box_input'>
+			<article className='box-input'>
 				{/* <!-- Word of Week --> */ }
 				<section className='flex flex-col pt-4 '>
 					<div className='flex justify-between'>
@@ -179,7 +179,7 @@ export default function BoxInput() {
 					/>
 				</section>
 				{/* <!-- isCard - isList --> */ }
-				<section className='w-full'>
+				<section>
 					<input
 						type='button'
 						id='isList'

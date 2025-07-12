@@ -7,7 +7,7 @@ import { Toaster } from 'sonner'
 
 const Page = () => {
 	return (
-		<section className={`${OrbitronBlackFont.className} box_page`}>
+		<section className={ `${ OrbitronBlackFont.className } box-page` }>
 			<Toaster />
 			<ToggleTheme />
 			<h1 className='h1'>Tasks Manager</h1>

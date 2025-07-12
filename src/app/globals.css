@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-	--color-x-color: #6200ea; /* Placeholder for custom color variable */
+	--color-x-color: #6200ea;
+	/* Placeholder for custom color variable */
 	--color-dark-bg: #121212;
 	--color-dark-2-bg: #1e1e1e;
 	--color-light-bg: #f1f1f1;
@@ -22,95 +23,97 @@
 	--color-x-button-hover: #3700b3;
 	--color-x-button-active: #3700b3;
 	--color-x-button-disabled: #9e9e9e;
-	--card-min-width: 300px; /* Minimum width for cards */
+	--card-min-width: 300px;
 	--card-width: 375px;
 }
 
-.box_page {
+.box-page {
 	width: 100%;
-	min-width: var(--card-min-width);
+	min-width: var(--card-width);
 	min-height: 100vh;
-	max-width: 1200px; /* Optional: to limit the width on larger screens */
-	margin: 0 auto; /* Center the content */
-	padding: 0 1rem; /* 16px */
-	padding-top: 1rem; /* 16px */
-	box-sizing: border-box; /* Ensure padding is included in width */
+	max-width: 1200px;
+	margin: 0 auto;
 	overflow: hidden;
 	background-color: var(--color-light-2-bg);
 	color: var(--color-dark-text);
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
-	text-align: center; /* Centered text for better aesthetics */
-	font-family: "Orbitron", sans-serif; /* Assuming Orbitron is imported */
-	letter-spacing: 0.05em; /* Adjusted for better readability */
-	text-transform: uppercase; /* Optional: to match the Orbitron style */
-	font-weight: 400; /* Regular weight */
-	font-size: 1rem; /* 16px */
-	line-height: 1.5; /* 24px */
-	/* Optional: Add a subtle shadow for depth */
+	text-align: center;
+	font-family: "Orbitron", sans-serif;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+	font-weight: 400;
+	font-size: 20px;
+	line-height: 1.5;
+}
+
+.x-container {
+	width: 100%;
+	min-height: 100vh;
+	padding: 1rem;
+	margin: 0 auto;
+	gap: 1rem;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: start;
+	justify-content: start;
+	background-color: var(--color-x-color);
+
 }
 
 h1 {
-	font-size: 2.5rem; /* 40px */
-	font-weight: 700; /* Bold */
+	width: 100%;
+	max-width: var(--card-width);
+	margin: 0 auto;
+	padding: 1rem;
 	color: var(--color-dark-text);
 	text-align: center;
-	padding-top: 2rem; /* 32px */
-	padding-bottom: 1rem; /* 16px */
-	margin: 0 auto;
-	width: 100%;
-	max-width: 1200px;
-}
-
-.card_container {
-	width: 100%;
-	/* margin: 0 auto; */
-	min-height: 100vh;
-	/* background-color: var(--color-x-bg); */
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: start;
-	align-items: start;
-	gap: 1rem; /* 16px */
-	padding: 1rem; /* 16px */
+	font-size: 2rem;
+	font-weight: 700;
 }
 
 ul {
-	list-style: none; /* Remove default list styles */
-	padding: 0; /* Remove default padding */
-	margin: 0 auto; /* Remove default margin */
-}
-
-.card_list {
-	width: var(--card-width);
-	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
-	/* justify-content: space-between; */
-	gap: 3px 0px;
-	background-color: var(--color-x-bg);
-}
-
-.card_box {
-	width: var(--card-width);
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: start;
+	list-style: none;
+	padding: 0;
 	margin: 0 auto;
-	padding: 1rem; /* 16px */
-	border-radius: 0.5rem; /* 8px */
+}
+
+.list-box {
+	width: var(--card-width);
+	display: flex;
+	flex-direction: column;
+	gap: 1px 0;
+}
+
+.box-list {
+	min-width: var(--card-width);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 2rem 1rem;
+	border-bottom: 2px solid var(--color-x-color);
+	background-color: var(--color-x-link);
+}
+
+.box-card {
+	width: var(--card-width);
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	justify-content: center;
+	padding: 1rem;
+	border-radius: 0.5rem;
 	background-color: var(--color-light-bg);
 	transition: transform 0.3s ease;
 	box-shadow: 1px 3px 10px var(--color-2-shadow);
 }
 
-.card_image {
+.card-image {
 	width: 100%;
-	height: 16rem; /* 64 * 0.25rem */
+	height: 16rem;
 	object-fit: cover;
-	border-radius: 0.5rem; /* 8px */
+	border-radius: 0.5rem;
 
 	&:hover {
 		height: 50dvh;
@@ -119,7 +122,7 @@ ul {
 	}
 }
 
-.card_info {
+.card-info {
 	width: 100%;
 	height: clamp(10rem, 15vh, 20rem);
 	overflow: hidden;
@@ -134,7 +137,7 @@ ul {
 		padding: 1.5rem 0.25rem;
 		text-align: start;
 		text-overflow: clip;
-		font-size: 1.5rem; /* 48px */
+		font-size: 1.5rem;
 		font-style: italic;
 		text-decoration: none;
 		color: var(--color-dark-text);
@@ -143,14 +146,14 @@ ul {
 
 	& p#task-amount-card {
 		width: 100%;
-		font-size: 2rem; /* 32px */
-		font-weight: 900; /* Bold */
+		font-size: 2rem;
+		font-weight: 900;
 		text-align: center;
 		text-wrap: wrap;
 		text-overflow: ellipsis;
 		overflow: hidden;
 		padding: 0 0.25rem;
-		margin-top: 0.5rem; /* 8px */
+		margin-top: 0.5rem;
 		line-height: 4rem;
 		background-color: var(--color-x-error);
 
@@ -162,55 +165,54 @@ ul {
 
 	& p#task-date-card {
 		width: 100%;
-		font-size: 1.2rem; /* 16px */
+		font-size: 1.2rem;
 		color: var(--color-light-2-text);
 		text-align: start;
 		padding: 0.5rem 0.25rem;
 	}
 }
 
-.box_input {
+.box-input {
 	width: var(--card-width);
 	min-width: 400px;
 	margin: 0 auto;
 
 	& input#newTask {
 		width: 100%;
-		height: 6rem; /* 96px */
+		height: 6rem;
 		background-color: var(--color-x-link);
 		color: var(--color-dark-text);
-		font-size: 2rem; /* 32px */
-		padding: 0.5rem 1rem; /* 8px 16px */
-		border-radius: 0.5rem 0 0 0 ; /* Rounded top corners */
-		border: none; /* Remove default border */
-		outline: none; /* Remove default outline */
+		font-size: 2rem;
+		padding: 0.5rem 1rem;
+		border-radius: 0.5rem 0 0 0;
+		border: none;
+		outline: none;
 		transition: background-color 0.3s ease, color 0.3s ease;
 
 		&::placeholder {
 			color: var(--color-dark-text);
-			opacity: 0.7; /* Slightly transparent placeholder */
+			opacity: 0.7;
 		}
 
 		&:focus {
 			background-color: var(--color-x-accent);
 			color: var(--color-dark-text);
-			border: none; /* Ensure no border on focus */
-			outline: none; /* Ensure no outline on focus */
+			border: none;
+			outline: none;
 		}
 
 	}
 
-								/* className='w-48 h-24 bg-x-link hover:bg-x-accent text-dark-text text-6xl font-bold cursor-pointer sm:rounded-tr-lg' */
 	& button#btn-add-task {
-		width: 12rem; /* 192px */
-		height: 6rem; /* 96px */
+		width: 12rem;
+		height: 6rem;
 		background-color: var(--color-x-link);
 		color: var(--color-dark-text);
-		font-size: 4rem; /* 32px */
+		font-size: 4rem;
 		font-weight: bold;
-		border-radius: 0 0.5rem 0 0; /* Rounded top corners */
-		border: none; /* Remove default border */
-		outline: none; /* Remove default outline */
+		border-radius: 0 0.5rem 0 0;
+		border: none;
+		outline: none;
 		transition: background-color 0.3s ease, color 0.3s ease;
 		cursor: pointer;
 
@@ -238,39 +240,37 @@ input[type="file"] {
 	text-align: center;
 	background-color: var(--color-x-link);
 	color: var(--color-dark-text);
-	font-size: .6rem; /* 16px */
-	padding: 0.5rem; /* 8px 16px */
-	border: none; /* Remove default border */
-	outline: none; /* Remove default outline */
+	font-size: .6rem;
+	padding: 0.5rem;
+	border: none;
+	outline: none;
 	transition: background-color 0.3s ease, color 0.3s ease;
 
 	&::file-selector-button {
 		background-color: var(--color-x-accent);
 		color: var(--color-dark-text);
-		padding: 0.5rem 1rem; /* 8px 16px */
-		border-radius: 0.5rem; /* Rounded corners */
+		padding: 0.5rem 1rem;
+		border-radius: 0.5rem;
 		cursor: pointer;
 	}
 
 	&::placeholder {
 		color: var(--color-dark-text);
-		opacity: 0.7; /* Slightly transparent placeholder */
+		opacity: 0.7;
 	}
 }
 
-/* w-full h-24 py-2 cursor-pointer uppercase text-center text-2xl font-bold sm:rounded-b-xl bg-x-link hover:bg-x-hover */
-
 input[type="button"]#isList {
 	width: 100%;
-	height: 4rem; /* 96px */
+	height: 4rem;
 	background-color: var(--color-x-link);
 	color: var(--color-dark-text);
-	font-size: 2rem; /* 32px */
+	font-size: 2rem;
 	text-transform: uppercase;
-	padding: 0.5rem; /* 8px 16px */
-	border-radius: 0 0 0.5rem 0.5rem; /* Rounded top corners */
-	border: none; /* Remove default border */
-	outline: none; /* Remove default outline */
+	padding: 0.5rem;
+	border-radius: 0 0 0.5rem 0.5rem;
+	border: none;
+	outline: none;
 	transition: background-color 0.3s ease, color 0.3s ease;
 
 	&:hover {
@@ -286,57 +286,53 @@ input[type="button"]#isList {
 
 }
 
-.box_phrase {
+.box-phrase {
 	max-width: var(--card-width);
-	font-size: 2rem; /* 32px */
+	font-size: 2rem;
 	text-transform: uppercase;
 	text-decoration: underline;
-	padding: 1.5rem 0; /* 24px */
+	padding: 1.5rem 0;
 	text-align: center;
 }
 
 footer {
 	width: 100%;
-	padding: 1rem; /* 16px */
+	padding: 1rem;
 	background-color: var(--color-light-2-bg);
 	color: var(--color-dark-text);
 	text-align: center;
-	font-size: 0.7rem; /* 16px */
-	font-weight: 400; /* Regular weight */
+	font-size: 0.7rem;
+	font-weight: 400;
 	position: relative;
 	bottom: 0;
 }
 
 .theme-toggle {
-	/* flex justify-end items-center w-full p-2 */
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
 	width: 100%;
-	padding: 0.5rem; /* 8px */
+	padding: 0.5rem;
 }
 
-/* LinkBar */
-/* .w-full flex flex-wrap gap-2 justify-evenly items-center */
-
-.box_link_bar {
+.box-link-bar {
 	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
-	gap: 0.5rem; /* 8px */
+	gap: 0.5rem;
 	justify-content: space-between;
 	align-items: center;
 }
 
-.link_bar_card {
+.link-bar-card {
 	width: 5rem;
-	min-width: fit-content; /* 112px */
-	height: 3rem; /* 48px */
+	min-width: fit-content;
+	height: 3rem;
 	display: flex;
 	align-items: center;
 	justify-content: start;
-	padding: 0.5rem; /* 8px */
-	border-radius: 0.5rem; /* 8px */
+	padding: 0.5rem;
+	border-radius: 0.5rem;
 	box-shadow: 0 2px 4px var(--color-x-shadow);
 
 	&:hover {

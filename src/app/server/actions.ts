@@ -91,7 +91,6 @@ export async function UpdateTask( updateTask: Task) {
 			completed: !completed,
 		},
 	})
-	//. Revalidar la ruta para que se vea el cambio en la UI
 	revalidatePath('/')
 	return
 }
