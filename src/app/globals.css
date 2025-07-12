@@ -89,7 +89,7 @@ ul {
 	flex-direction: column;
 	/* justify-content: space-between; */
 	gap: 3px 0px;
-	background-color: var(--color-light-bg);
+	background-color: var(--color-x-bg);
 }
 
 .card_box {
@@ -232,7 +232,6 @@ ul {
 	}
 }
 
-/* block w-full text-xs bg-x-link hover:file:bg-x-accent file:mr-2 file:px-4 file:py-1 file:border-0 file:placeholder:text-x-link */
 input[type="file"] {
 	display: block;
 	width: 100%;
@@ -257,6 +256,34 @@ input[type="file"] {
 		color: var(--color-dark-text);
 		opacity: 0.7; /* Slightly transparent placeholder */
 	}
+}
+
+/* w-full h-24 py-2 cursor-pointer uppercase text-center text-2xl font-bold sm:rounded-b-xl bg-x-link hover:bg-x-hover */
+
+input[type="button"]#isList {
+	width: 100%;
+	height: 4rem; /* 96px */
+	background-color: var(--color-x-link);
+	color: var(--color-dark-text);
+	font-size: 2rem; /* 32px */
+	text-transform: uppercase;
+	padding: 0.5rem; /* 8px 16px */
+	border-radius: 0 0 0.5rem 0.5rem; /* Rounded top corners */
+	border: none; /* Remove default border */
+	outline: none; /* Remove default outline */
+	transition: background-color 0.3s ease, color 0.3s ease;
+
+	&:hover {
+		background-color: var(--color-x-accent);
+		color: var(--color-dark-text);
+		cursor: pointer;
+	}
+
+	&:active {
+		background-color: var(--color-x-hover);
+		color: var(--color-dark-text);
+	}
+
 }
 
 .box_phrase {

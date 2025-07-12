@@ -6,6 +6,7 @@ import { revalidatePath } from 'next/cache'
 import { existsSync, mkdirSync } from 'node:fs'
 import { upImages } from '../../services/firebase.config.js'
 import { writeFile } from 'fs/promises'
+import { NextApiRequest, NextApiResponse } from 'next'
 
 //TODO: Seguridad en las Cookies
 
@@ -70,7 +71,7 @@ export async function AddTask(AddTask: Task) {
 	}
 }
 
-export async function UpdateTask( updateTask: Task ) {
+export async function UpdateTask( updateTask: Task) {
 	if ( !updateTask || typeof updateTask !== 'object' ) return
 	console.log('UpdateTask', updateTask)
 	const { id, completed } = updateTask
@@ -98,17 +99,21 @@ export async function UpdateTask( updateTask: Task ) {
 export async function DeleteTask(deleteTask: Task) {
 	const existingTask = await prisma.Tasks.findFirst({
 		where: {
-			concept: `${deleteTask}`,
+			concept: deleteTask.concept,
 		},
 	})
-	if (!existingTask) return
-	const deletedTASK = await prisma.Tasks.delete({
+	if ( !existingTask ) {
+		return {status: 404, error: "no deleted" }
+	}
+
+	await prisma.Tasks.delete({
 		where: {
 			id: existingTask.id,
 		},
 	} )
-	revalidatePath('/')
-	return deletedTASK
+	revalidatePath( '/' )
+	console.log({ message: "task deleted" })
+	return { message: "task deleted" }
 }
 
 //! Image -> Firebase Storage

@@ -41,6 +41,7 @@ export default function BoxInput() {
 	const [ newTask, setNewTask ] = useState( '' )
 	const [ image, setImg ] = useState( '' )
 	const [ isList, setIsList ] = useState( true )
+	const [ isDeleted, setIsDeleted ] = useState( false )
 
 	const [ Phrase, setPhrase ] = useState( 'Phrase' )
 
@@ -48,16 +49,15 @@ export default function BoxInput() {
 		const _getTasks = async () => {
 			const _tasksInitial = await GetTasks()
 			setTasks( _tasksInitial )
-			setPhrase( localStorage.getItem( 'phrase' ) )
-			router.push( '/' )
-			return
+			const storedPhrase = localStorage.getItem( 'phrase' )
+			if ( storedPhrase ) setPhrase( storedPhrase )
 		}
 		_getTasks()
-	}, [ tasks ] )
+	}, [] )
 
 
 
-	//! Save the image on the cloud
+	//* Save the image on the cloud
 	const handleUpImage = async ( evt ) => {
 		const file = evt.target.files[ 0 ]
 		const formData = new FormData()
@@ -71,6 +71,8 @@ export default function BoxInput() {
 		return
 	}
 
+	//* Add New task and Delete task
+
 	const handleInputChange = useDebounce( newTask, 500 )
 
 	let task = {}
@@ -82,7 +84,13 @@ export default function BoxInput() {
 			const partTask = newTask.split( ':' )
 
 			if ( partTask[ 1 ] === 'del' ) {
-				await DeleteTask( partTask[ 0 ] )
+				const isDeleted = await DeleteTask( partTask[ 0 ] )
+				if ( isDeleted?.message == "task deleted" ) {
+					router.push( '/' )
+					setIsDeleted( true )
+					return
+				}
+				return
 			}
 
 			if ( partTask[ 1 ] === 'kyrye' ) {
@@ -129,18 +137,12 @@ export default function BoxInput() {
 		}
 	}
 
-	//! Select between Card and List
+	//* Select between Card and List
 	const handleIsList = ( evt ) => {
 		evt.preventDefault()
 		setIsList( !isList )
 		return
 	}
-
-	// <div>
-	//   <button type="button" onClick={() => toast.success("Edit task")} className="btn btn-edit">
-	//     <span className="material-symbols-outlined">edit</span>
-	//   </button>
-	// </div>
 
 	return (
 		<section>
@@ -180,9 +182,10 @@ export default function BoxInput() {
 				<section className='w-full'>
 					<input
 						type='button'
-						value={ setIsList ? 'List' : 'Cards' }
+						id='isList'
+						aria-label='Toggle view between List and Cards'
+						value={ isList ? 'List' : 'Cards' }
 						onClick={ ( evt ) => handleIsList( evt ) }
-						className='w-full h-24 py-2 cursor-pointer uppercase text-center text-2xl font-bold sm:rounded-b-xl bg-x-link hover:bg-x-hover'
 					/>
 				</section>
 				<BoxWord Phrase={ Phrase } />
