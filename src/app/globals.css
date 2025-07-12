@@ -7,6 +7,7 @@
 	--color-dark-2-bg: #1e1e1e;
 	--color-light-bg: #f1f1f1;
 	--color-dark-text: #040404;
+	--color-dark-2-text:#121212;
 	--color-light-text: #ffffff;
 	--color-light-2-text: #a0a0a0;
 	--color-dark-border: #2c2c2c;
@@ -92,7 +93,7 @@ ul {
 	align-items: center;
 	justify-content: space-between;
 	padding: 2rem 1rem;
-	border-bottom: 2px solid var(--color-x-color);
+	border-bottom: 2px dashed var(--color-x-link);
 	background-color: var(--color-x-link);
 }
 
@@ -114,6 +115,10 @@ ul {
 	height: 16rem;
 	object-fit: cover;
 	border-radius: 0.5rem;
+
+}
+
+.card-image-effect {
 
 	&:hover {
 		height: 50dvh;
@@ -146,16 +151,14 @@ ul {
 
 	& p#task-amount-card {
 		width: 100%;
+		height: 4rem;
 		font-size: 2rem;
 		font-weight: 900;
 		text-align: center;
 		text-wrap: wrap;
 		text-overflow: ellipsis;
 		overflow: hidden;
-		padding: 0 0.25rem;
-		margin-top: 0.5rem;
-		line-height: 4rem;
-		background-color: var(--color-x-error);
+		padding: 0.5rem 0 1rem 0;
 
 		&:hover {
 			cursor: pointer;
@@ -297,6 +300,7 @@ input[type="button"]#isList {
 
 footer {
 	width: 100%;
+	position: fixed;
 	padding: 1rem;
 	background-color: var(--color-light-2-bg);
 	color: var(--color-dark-text);

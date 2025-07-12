@@ -28,7 +28,7 @@ export default function CardTasks( { tasks } ) {
 									alt={ task?.concept }
 									width={ 1080 }
 									height={ 1080 }
-									className='card-image'
+									className='card-image card-image-effect'
 								/>
 							) }
 						</div>
@@ -46,9 +46,9 @@ export default function CardTasks( { tasks } ) {
 							</p>
 							<p
 								id='task-amount-card'
-								className={ `${ task.amount < 0 ? 'text-x-error' : 'text-dark-bg' } ` }
+								className={ `${ task.amount < 0 ? 'text-x-error' : ( task.amount > 0 ? 'text-x-color' : 'text-light-2-text' ) } ` }
 							>
-								USD({ task.amount === 0 ? 'zero' : task.amount })
+								USD({ task.amount === 0 ? '0' : task.amount })
 							</p>
 							<p id='task-date-card'>{ task?.initAt }</p>
 						</div>
