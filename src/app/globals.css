@@ -58,7 +58,7 @@
 	flex-wrap: wrap;
 	align-items: start;
 	justify-content: start;
-	background-color: var(--color-x-color);
+	/* background-color: var(--color-x-bg); */
 
 }
 
